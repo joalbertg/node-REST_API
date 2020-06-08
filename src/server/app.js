@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const PORT = 8080;
+const { PORT, APPLICATION_NAME } = require('../config');
+
+//const PORT = 8080;
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -54,5 +56,8 @@ app.delete('/delete', function (req, res) {
   res.json('Hello World');
 });
 
-app.listen(PORT, () => console.log(`Listening in PORT ${PORT}`));
+app.listen(PORT, () => console.log(
+`App: ${APPLICATION_NAME}
+Listening in PORT ${PORT}`
+));
 

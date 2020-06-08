@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server/app",
     "start:dev": "nodemon src/server/app"
   },
   "keywords": [],
@@ -15,6 +16,8 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.4"
   }
 }
+

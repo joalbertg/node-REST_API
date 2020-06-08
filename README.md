@@ -10,7 +10,7 @@ docker-compose run app yarn
 Without dependecies
 ```shell
 docker-compose run app yarn express body-parser
-docker-compose run app yarn --dev nodemon
+docker-compose run app yarn --dev nodemon dotenv
 ```
 
 ### Start project
@@ -40,10 +40,12 @@ Data persists in `/data/db` file.
 ├── docker-compose.yml
 ├── package.json
 ├── src
+│   ├── config
+│   │   └── index.js
 │   └── server
 │       └── app.js
 └── yarn.lock
 
-2 directories, 6 files
+3 directories, 7 files
 ```
 
