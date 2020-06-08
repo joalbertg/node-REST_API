@@ -9,7 +9,7 @@ docker-compose run app yarn
 
 Without dependecies
 ```shell
-docker-compose run app yarn express
+docker-compose run app yarn express body-parser
 docker-compose run app yarn --dev nodemon
 ```
 
