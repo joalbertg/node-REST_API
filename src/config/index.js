@@ -6,6 +6,7 @@ if(process.env.NODE_ENV !== 'production') {
 
 const MONGO_OPTS = {
   useNewUrlParser: true,
+  useCreateIndex: true,
   useFindAndModify: false,
   useUnifiedTopology: true
 };
