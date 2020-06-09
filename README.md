@@ -63,3 +63,29 @@ Add the **engines** key to `package.json`
 ...
 ```
 
+> run `heroku login`
+
+- Create add
+> run `heroku apps:create <app-name>`
+
+- View git remotes
+> run `git remote -v`
+
+- Push heroku
+> run `git push heroku master`
+
+- View logs
+> run `heroku logs --tail`
+
+- Open app
+> run `heroku open`
+
+- View vars
+> run `heroku config`
+
+- Create var
+> run `heroku config:set <var-name>="<value>"`
+
+- Delete var
+> run `heroku config:unset <var-name>`
+
