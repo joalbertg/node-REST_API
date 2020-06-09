@@ -25,7 +25,6 @@ docker-compose run app yarn --dev nodemon dotenv
 
 > `localhost:8081`, you can change the port in `docker-compose.yml` file `<host-port>:8080`
 
-
 #### mongo service
 
 Data persists in `/data/db` file.
@@ -47,5 +46,20 @@ Data persists in `/data/db` file.
 └── yarn.lock
 
 3 directories, 7 files
+```
+
+### Heroku
+
+To deploy to the Heroku service
+
+> run `docker-compose run app node --version`, get the node version
+
+Add the **engines** key to `package.json`
+```json
+...
+"engines": {
+    "node": "14.0.0"
+  }
+...
 ```
 
