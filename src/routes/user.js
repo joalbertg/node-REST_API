@@ -7,10 +7,28 @@ const { User } = require('../models');
 const app = express();
 
 app.get('/users', function (req, res) {
-  res.json({users: [
-    {id: 123, name: "Joalbert"},
-    {id: 321, name: "Lisset"}
-  ]});
+  const from = Number(req.query.from) || 0;
+  const limit = Number(req.query.limit) || 5;
+
+  User
+    .find({})
+    .skip(from)
+    .limit(limit)
+    .exec((error, usersDB) => {
+      if (error) {
+        return res.status(400).json({
+          ok: false,
+          error
+        });
+      }
+
+      User.count({}, (error, count) => {
+        res.json({
+          count,
+          users: usersDB
+        });
+      } );
+    });
 });
 
 app.get('/users/:id', function (req, res) {
@@ -23,7 +41,6 @@ app.get('/users/:id', function (req, res) {
         error
       });
     }
-
     res.json({ user: userDB });
   });
 });
