@@ -14,7 +14,17 @@ app.get('/users', function (req, res) {
 
 app.get('/users/:id', function (req, res) {
   const { id } = req.params;
-  res.json(`user: ${id}`);
+
+  User.findById(id, (error, userDB) => {
+    if (error) {
+      return res.status(400).json({
+        ok: false,
+        error
+      });
+    }
+
+    res.json({ user: userDB });
+  });
 });
 
 app.post('/users', function (req, res) {
@@ -42,13 +52,22 @@ app.post('/users', function (req, res) {
 });
 
 app.put('/users/:id', function (req, res) {
-  const user = {
-    id: 123,
-    name: 'Jolabert'
-  };
-  const { name } = req.body;
-  user.name = name;
-  res.json(user);
+  const id = req.params.id;
+  const body = req.body;
+
+  User.findByIdAndUpdate(id, body, { new: true }, (error, userDB) => {
+    if (error) {
+      return res.status(400).json({
+        ok: false,
+        error
+      });
+    }
+
+    res.json({
+      ok:  true,
+      user: userDB
+    });
+  });
 });
 
 app.delete('/delete', function (req, res) {
