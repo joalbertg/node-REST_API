@@ -4,17 +4,15 @@ const bodyParser = require('body-parser');
 
 const {
   PORT,
+  DB_URI,
   APPLICATION_NAME,
-  MONGO_URI,
   MONGO_OPTS
 } = require('../config');
 
-//const PORT = 8080;
 const app = express();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
- 
 // parse application/json
 app.use(bodyParser.json());
 
@@ -25,9 +23,7 @@ app.get('/', function (req, res) {
 });
 
 mongoose
-  //connect without user:pass
-  //.connect(`${MONGO_URI}/mydb, MONGO_OPTS)
-  .connect(`${MONGO_URI}/mydb?authSource=admin`, MONGO_OPTS)
+  .connect(DB_URI, MONGO_OPTS)
   .then(() => {
     console.info('DB Online!!!');
     app.listen(PORT, () => {
