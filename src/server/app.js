@@ -25,7 +25,9 @@ app.get('/', function (req, res) {
 });
 
 mongoose
-  .connect(`${MONGO_URI}/mydb`, MONGO_OPTS)
+  //connect without user:pass
+  //.connect(`${MONGO_URI}/mydb, MONGO_OPTS)
+  .connect(`${MONGO_URI}/mydb?authSource=admin`, MONGO_OPTS)
   .then(() => {
     console.info('DB Online!!!');
     app.listen(PORT, () => {

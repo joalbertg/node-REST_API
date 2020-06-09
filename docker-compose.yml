@@ -14,9 +14,9 @@ services:
     restart: always
     volumes:
       - ./data/db:/data/db
-    #environment:
-    #    MONGO_INITDB_ROOT_USERNAME: root
-    #    MONGO_INITDB_ROOT_PASSWORD: password
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: password
   mongo-express:
     image: mongo-express
     restart: always
@@ -24,7 +24,7 @@ services:
       - 8081:8081
     depends_on:
       - mongo
-    #environment:
-    #  ME_CONFIG_MONGODB_ADMINUSERNAME: root
-    #  ME_CONFIG_MONGODB_ADMINPASSWORD: password
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
 
