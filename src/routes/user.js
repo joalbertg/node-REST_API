@@ -11,7 +11,7 @@ app.get('/users', function (req, res) {
   const limit = Number(req.query.limit) || 5;
 
   User
-    .find({})
+    .find({}, 'name email role status google img')
     .skip(from)
     .limit(limit)
     .exec((error, usersDB) => {
