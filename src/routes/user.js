@@ -1,7 +1,7 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 
 const { User } = require('../models');
-console.log(User)
 
 const app = express();
 
@@ -20,7 +20,10 @@ app.get('/users/:id', function (req, res) {
 app.post('/users', function (req, res) {
   const { name, email, password, role } = req.body;
   const user = new User({
-    name, email, password, role
+    name,
+    email,
+    password: bcrypt.hashSync(password, 10),
+    role
   });
 
   user.save((error, userDB) => {

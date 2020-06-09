@@ -40,6 +40,16 @@ const UsersSchema = new Schema({
   }
 });
 
+// to delete password from response
+// this delete userDB.password not found
+UsersSchema.methods.toJSON = function() {
+  const model = this;
+  const userObject = model.toObject();
+
+  delete userObject.password;
+  return userObject;
+}
+
 UsersSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', UsersSchema);
