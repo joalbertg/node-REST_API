@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
 const { User } = require('../models');
+const { AuthMiddleware } = require('../middlewares');
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.get('/users', function (req, res) {
     .exec((error, usersDB) => {
       if (error) return badRequest(error, res);
 
-      User.count(opts, (error, count) => {
+      User.countDocuments(opts, (error, count) => {
         res.json({
           count,
           users: usersDB
@@ -45,7 +46,7 @@ app.get('/users/:id', function (req, res) {
   });
 });
 
-app.post('/users', function (req, res) {
+app.post('/users', AuthMiddleware, function (req, res) {
   const { name, email, password, role } = req.body;
   const user = new User({
     name,
@@ -64,7 +65,7 @@ app.post('/users', function (req, res) {
   });
 });
 
-app.put('/users/:id', function (req, res) {
+app.put('/users/:id', AuthMiddleware, function (req, res) {
   const id = req.params.id;
   const body = _.pick(req.body, ['name', 'email', 'img', 'role', 'status']);
 
@@ -78,7 +79,7 @@ app.put('/users/:id', function (req, res) {
   });
 });
 
-app.delete('/users/:id', function (req, res) {
+app.delete('/users/:id', AuthMiddleware, function (req, res) {
   const id = req.params.id;
   const flag = req.body.flag;
 

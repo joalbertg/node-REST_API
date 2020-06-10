@@ -1,7 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const { User } = require('../models');
+const { TOKEN_EXPIRES_IN, SECRET_SEED_TOKEN } = require('../config');
 
 const app = express();
 
@@ -11,6 +13,12 @@ const badRequest = (error, res, message) => {
     error: message ? { message } : error
   });
 }
+
+const generateToken = body => jwt.sign(
+  body,
+  SECRET_SEED_TOKEN,
+  { expiresIn: Number(TOKEN_EXPIRES_IN) }
+);
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
@@ -25,7 +33,7 @@ app.post('/login', (req, res) => {
     res.json({
       ok: true,
       user: userDB.name,
-      token: '123abc'
+      token: generateToken({ user: userDB })
     });
   });
 });

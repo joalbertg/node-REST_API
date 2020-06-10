@@ -11,6 +11,7 @@ const MONGO_OPTS = {
   useUnifiedTopology: true
 };
 
+// Process URI
 const dbObj = {
   RAW_DB_URI: process.env.RAW_DB_URI,
   DB_USER: process.env.DB_USER,
@@ -20,10 +21,19 @@ const dbObj = {
   FLAG_ADMIN: process.env.FLAG_ADMIN
 };
 
+// Token Expires In
+// 60 seconds
+// 60 minutes
+// 24 hours
+// 30 days
+process.env.TOKEN_EXPIRES_IN = 60 * 60 * 24 * 30;
+
 module.exports = {
   PORT: process.env.PORT,
   APPLICATION_NAME: process.env.APPLICATION_NAME,
   MONGO_OPTS,
-  DB_URI: getURI(dbObj)
+  DB_URI: getURI(dbObj),
+  TOKEN_EXPIRES_IN: process.env.TOKEN_EXPIRES_IN,
+  SECRET_SEED_TOKEN: process.env.SECRET_SEED_TOKEN
 }
 
