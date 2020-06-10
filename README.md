@@ -1,5 +1,9 @@
 # REST API
 
+[JSON Web Token][jwt]
+
+[jwt]: https://jwt.io/
+
 ### installs
 
 With `package.json` and dependencies
@@ -88,4 +92,14 @@ Add the **engines** key to `package.json`
 
 - Delete var
 > run `heroku config:unset <var-name>`
+
+### Decode tocken
+
+```javascript
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace('-', '+').replace('_', '/');
+  return JSON.parse(window.atob(base64));
+};
+```
 
