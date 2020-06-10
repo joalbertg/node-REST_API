@@ -2,8 +2,6 @@
 
 [JSON Web Token][jwt]
 
-[jwt]: https://jwt.io/
-
 ### installs
 
 With `package.json` and dependencies
@@ -13,7 +11,7 @@ docker-compose run app yarn
 
 Without dependecies
 ```shell
-docker-compose run app yarn express body-parser mongoose mongoose-unique-validator bcrypt underscore jsonwebtoken
+docker-compose run app yarn express body-parser mongoose mongoose-unique-validator bcrypt underscore jsonwebtoken google-auth-library uuid
 docker-compose run app yarn --dev nodemon dotenv
 ```
 
@@ -33,9 +31,9 @@ docker-compose run app yarn --dev nodemon dotenv
 
 Data persists in `/data/db` file.
 
-### Structure
+### Structure
 
-> run `tree -I "node_modules|data"`
+> run `tree -I "node_modules|data|screenshots"`
 ```shell
 .
 ├── Dockerfile
@@ -45,11 +43,25 @@ Data persists in `/data/db` file.
 ├── src
 │   ├── config
 │   │   └── index.js
+│   ├── helpers
+│   │   ├── database.js
+│   │   └── index.js
+│   ├── middlewares
+│   │   ├── authentication.js
+│   │   ├── index.js
+│   │   └── verify-admin-role.js
+│   ├── models
+│   │   ├── index.js
+│   │   └── user.js
+│   ├── public
+│   │   └── index.html
+│   ├── routes
+│   │   ├── index.js
+│   │   ├── login.js
+│   │   └── user.js
 │   └── server
 │       └── app.js
 └── yarn.lock
-
-3 directories, 7 files
 ```
 
 ### Heroku
@@ -61,7 +73,7 @@ To deploy to the Heroku service
 Add the **engines** key to `package.json`
 ```json
 ...
-"engines": {
+  "engines": {
     "node": "14.0.0"
   }
 ...
@@ -69,7 +81,7 @@ Add the **engines** key to `package.json`
 
 > run `heroku login`
 
-- Create add
+- Create app
 > run `heroku apps:create <app-name>`
 
 - View git remotes
@@ -102,4 +114,37 @@ function parseJwt (token) {
   return JSON.parse(window.atob(base64));
 };
 ```
+
+### Google Sign-In (without using the Firebase service)
+
+- [Google Sign-In][sign_in]
+- [Console Developers][console_developers]
+- [backend auth][backend_auth]
+
+#### Console Developers
+<p align="center">
+  <kbd>
+    <img src="screenshots/console-developers.png" title="console developers"  width="800px" height="auto">
+  </kbd>
+</p>
+
+In `OAuth consent screen`
+
+- Type of user: `<External>`
+- Name app: `<any-name>`
+
+#### Client IDs
+
+<p align="center">
+  <kbd>
+    <img src="screenshots/client-id-oauth-2_0.png" title="client id oauth 2.0"  width="400px" height="auto">
+  </kbd>
+</p>
+
+> If error `idpiframe_initialization_failed not a valid origin for the client...`, delete and create a new credentials `IDs de cliente de OAuth 2.0` with `http://localhost:<your-port>` and url heroku server if exist `https://udemy-node-rest-api.herokuapp.com` in the white list.
+
+[jwt]: https://jwt.io/
+[sign_in]: https://developers.google.com/identity/sign-in/web/sign-in
+[console_developers]: https://console.developers.google.com/apis/credentials
+[backend_auth]: https://developers.google.com/identity/sign-in/web/backend-auth
 

@@ -34,6 +34,7 @@ module.exports = {
   MONGO_OPTS,
   DB_URI: getURI(dbObj),
   TOKEN_EXPIRES_IN: process.env.TOKEN_EXPIRES_IN,
-  SECRET_SEED_TOKEN: process.env.SECRET_SEED_TOKEN
+  SECRET_SEED_TOKEN: process.env.SECRET_SEED_TOKEN,
+  CLIENT_ID: process.env.CLIENT_ID
 }
 
