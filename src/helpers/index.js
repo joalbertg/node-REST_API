@@ -1,2 +1,5 @@
-module.exports = { ...require('./database') };
+module.exports = { 
+  ...require('./database'),
+  ...require('./http-errors')
+};
 

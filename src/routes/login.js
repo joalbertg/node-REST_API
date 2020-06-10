@@ -6,27 +6,17 @@ const uuid = require("uuid");
 
 const { User } = require('../models');
 const {
+  badRequest,
+  serverError,
+  forbiddenRequest
+} = require('../helpers');
+const {
   TOKEN_EXPIRES_IN,
   SECRET_SEED_TOKEN,
   CLIENT_ID
 } = require('../config');
-
 const client = new OAuth2Client(CLIENT_ID);
 const app = express();
-
-const badRequest = (error, res, message) =>
-  res.status(400).json(responseBody(error, message));
-
-const serverError = (error, res, message) =>
-  res.status(500).json(responseBody(error, message));
-
-const forbiddenRequest = (error, res, message) =>
-  res.status(403).json(responseBody(error, message));
-
-const responseBody = (error, message) => ({
-  ok: false,
-  error: message ? { message } : error
-});
 
 const generateToken = body => jwt.sign(
   body,
