@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
 const { User } = require('../models');
-const { AuthMiddleware } = require('../middlewares');
+const { AuthMiddleware, AdminRoleMiddleware } = require('../middlewares');
 
 const app = express();
 
@@ -46,7 +46,7 @@ app.get('/users/:id', function (req, res) {
   });
 });
 
-app.post('/users', AuthMiddleware, function (req, res) {
+app.post('/users', [AuthMiddleware, AdminRoleMiddleware], function (req, res) {
   const { name, email, password, role } = req.body;
   const user = new User({
     name,
@@ -65,7 +65,7 @@ app.post('/users', AuthMiddleware, function (req, res) {
   });
 });
 
-app.put('/users/:id', AuthMiddleware, function (req, res) {
+app.put('/users/:id', [AuthMiddleware, AdminRoleMiddleware], function (req, res) {
   const id = req.params.id;
   const body = _.pick(req.body, ['name', 'email', 'img', 'role', 'status']);
 
@@ -79,7 +79,7 @@ app.put('/users/:id', AuthMiddleware, function (req, res) {
   });
 });
 
-app.delete('/users/:id', AuthMiddleware, function (req, res) {
+app.delete('/users/:id', [AuthMiddleware, AdminRoleMiddleware], function (req, res) {
   const id = req.params.id;
   const flag = req.body.flag;
 

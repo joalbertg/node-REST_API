@@ -1,2 +1,5 @@
-module.exports = { AuthMiddleware: require('./authentication') };
+module.exports = { 
+  AuthMiddleware: require('./authentication'),
+  AdminRoleMiddleware: require('./verify-admin-role')
+};
 
