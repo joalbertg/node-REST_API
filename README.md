@@ -11,7 +11,7 @@ docker-compose run app yarn
 
 Without dependecies
 ```shell
-docker-compose run app yarn express body-parser mongoose mongoose-unique-validator bcrypt underscore jsonwebtoken google-auth-library uuid
+docker-compose run app yarn express body-parser mongoose mongoose-unique-validator bcrypt underscore jsonwebtoken google-auth-library uuid express-fileupload mkdirp
 docker-compose run app yarn --dev nodemon dotenv
 ```
 
