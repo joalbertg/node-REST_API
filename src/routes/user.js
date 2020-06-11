@@ -54,7 +54,7 @@ app.post(base, [AuthMiddleware, AdminRoleMiddleware], (req, res) => {
   user.save((error, userDB) => {
     if (error) return serverError(error, res);
 
-    res.json({
+    res.status(201).json({
       ok: true,
       user: userDB
     });

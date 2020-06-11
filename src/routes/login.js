@@ -21,7 +21,7 @@ const app = express();
 const generateToken = body => jwt.sign(
   body,
   SECRET_SEED_TOKEN,
-  { expiresIn: Number(TOKEN_EXPIRES_IN) }
+  { expiresIn: TOKEN_EXPIRES_IN }
 );
 
 app.post('/login', (req, res) => {

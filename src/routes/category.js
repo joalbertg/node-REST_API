@@ -54,7 +54,7 @@ app.post(base, AuthMiddleware, (req, res) => {
     if (error) return serverError(error, res);
     if (!categoryDB) return badRequest(error, res);
 
-    res.json({
+    res.status(201).json({
       ok: true,
       category: categoryDB
     });
