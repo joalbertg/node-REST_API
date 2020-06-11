@@ -45,19 +45,24 @@ Data persists in `/data/db` file.
 │   │   └── index.js
 │   ├── helpers
 │   │   ├── database.js
+│   │   ├── http-errors.js
 │   │   └── index.js
 │   ├── middlewares
 │   │   ├── authentication.js
 │   │   ├── index.js
 │   │   └── verify-admin-role.js
 │   ├── models
+│   │   ├── category.js
 │   │   ├── index.js
+│   │   ├── product.js
 │   │   └── user.js
 │   ├── public
 │   │   └── index.html
 │   ├── routes
+│   │   ├── category.js
 │   │   ├── index.js
 │   │   ├── login.js
+│   │   ├── product.js
 │   │   └── user.js
 │   └── server
 │       └── app.js

@@ -7,8 +7,9 @@ const { badRequest, serverError } = require('../helpers');
 const { AuthMiddleware, AdminRoleMiddleware } = require('../middlewares');
 
 const app = express();
+const base = '/users';
 
-app.get('/users', function (req, res) {
+app.get(base, (req, res) => {
   const from = Number(req.query.from) || 0;
   const limit = Number(req.query.limit) || 5;
 
@@ -30,7 +31,7 @@ app.get('/users', function (req, res) {
     });
 });
 
-app.get('/users/:id', function (req, res) {
+app.get(`${base}/:id`, (req, res) => {
   const { id } = req.params;
 
   User.findById(id, (error, userDB) => {
@@ -41,7 +42,7 @@ app.get('/users/:id', function (req, res) {
   });
 });
 
-app.post('/users', [AuthMiddleware, AdminRoleMiddleware], function (req, res) {
+app.post(base, [AuthMiddleware, AdminRoleMiddleware], (req, res) => {
   const { name, email, password, role } = req.body;
   const user = new User({
     name,
@@ -60,7 +61,7 @@ app.post('/users', [AuthMiddleware, AdminRoleMiddleware], function (req, res) {
   });
 });
 
-app.put('/users/:id', [AuthMiddleware, AdminRoleMiddleware], function (req, res) {
+app.put(`${base}/:id`, [AuthMiddleware, AdminRoleMiddleware], (req, res) => {
   const id = req.params.id;
   const body = _.pick(req.body, ['name', 'email', 'img', 'role', 'status']);
 
@@ -74,7 +75,7 @@ app.put('/users/:id', [AuthMiddleware, AdminRoleMiddleware], function (req, res)
   });
 });
 
-app.delete('/users/:id', [AuthMiddleware, AdminRoleMiddleware], function (req, res) {
+app.delete(`${base}/:id`, [AuthMiddleware, AdminRoleMiddleware], (req, res) => {
   const id = req.params.id;
   const flag = req.body.flag;
 
