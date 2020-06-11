@@ -28,7 +28,7 @@ app.get(base, (req, res) => {
       Product.countDocuments(opts, (error, count) => {
         res.json({
           count,
-          product: productDB
+          products: productDB
         });
       });
     });
@@ -120,6 +120,20 @@ app.delete(`${base}/:id`, AuthMiddleware, (req, res) => {
   }
 });
 
+app.get(`${base}/search/:word`, AuthMiddleware, (req, res) => {
+  const word = req.params.word;
+  const regex = new RegExp(word, 'i');
+
+  Product.find({ name: regex })
+    .populate('category', 'name')
+    .exec((error, productsDB) => {
+      if (error) return serverError(error, res);
+
+      res.json({
+        products: productsDB
+      });
+    });
+});
 
 module.exports = app;
 
