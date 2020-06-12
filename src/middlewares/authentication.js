@@ -21,5 +21,19 @@ const verifyToken = (req, res, next) => {
   });
 }
 
-module.exports = verifyToken;
+const verifyTokenImg = (req, res, next) => {
+  const token = req.query.token;
+
+  jwt.verify(token, SECRET_SEED_TOKEN, (error, decoded) => {
+    if (error) return unauthorizedRequest(error, res);
+
+    req.user = decoded.user;
+    next();
+  });
+}
+
+module.exports = {
+  verifyToken,
+  verifyTokenImg
+};
 

@@ -9,7 +9,7 @@ With `package.json` and dependencies
 docker-compose run app yarn
 ```
 
-Without dependecies
+Without dependencies
 ```shell
 docker-compose run app yarn express body-parser mongoose mongoose-unique-validator bcrypt underscore jsonwebtoken google-auth-library uuid express-fileupload mkdirp
 docker-compose run app yarn --dev nodemon dotenv
@@ -45,6 +45,7 @@ Data persists in `/data/db` file.
 │   │   └── index.js
 │   ├── helpers
 │   │   ├── database.js
+│   │   ├── files.js
 │   │   ├── http-errors.js
 │   │   └── index.js
 │   ├── middlewares
@@ -57,16 +58,23 @@ Data persists in `/data/db` file.
 │   │   ├── product.js
 │   │   └── user.js
 │   ├── public
+│   │   ├── assets
+│   │   │   └── imgs
+│   │   │       └── no-image.jpg
 │   │   └── index.html
 │   ├── routes
 │   │   ├── category.js
+│   │   ├── images.js
 │   │   ├── index.js
 │   │   ├── login.js
 │   │   ├── product.js
+│   │   ├── upload.js
 │   │   └── user.js
 │   └── server
 │       └── app.js
 └── yarn.lock
+
+10 directories, 27 files
 ```
 
 ### Heroku

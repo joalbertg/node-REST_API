@@ -13,7 +13,6 @@ const app = express();
 
 // default options
 app.use(fileUpload());
-//app.use(fileUpload({ useTempFiles: true }));
 
 const validFile = req => {
   return req.files && Object.keys(req.files).length != 0;
@@ -32,7 +31,6 @@ app.put('/upload/:kind/:id', (req, res) => {
   const file = req.files.file;
   const extension = file.name.split('.').pop();
 
-  //if (!validKinds(kind)) return badRequest(null, res, 'Kind not allowed');
   if (!validExtensions(extension)) return badRequest(null, res, 'Format not allowed');
   const fileSettings = {
     id,
